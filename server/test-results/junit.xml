@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="jest tests" tests="1" failures="0" time="1.35">
+  <testsuite name="Queryc.chats 테스트" errors="0" failures="0" skipped="0" timestamp="2020-03-07T02:59:28" time="0.893" tests="1">
+    <testcase classname="Queryc.chats 테스트 세부적인 채팅을 추적해야 함" name="Queryc.chats 테스트 세부적인 채팅을 추적해야 함" time="0.029">
+    </testcase>
+  </testsuite>
+</testsuites>
