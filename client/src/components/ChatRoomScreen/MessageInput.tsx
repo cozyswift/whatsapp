@@ -75,6 +75,7 @@ function MessageInput({ onSendMessage }: MessageInputProps) {
       type="text" 
       placeholder="Type a message" 
       onKeyPress={onKeyPress}
+      value={message}
       onChange={onChange}
       />
       <SendButton variant="contained" color="primary" onClick={submitMessage}>
