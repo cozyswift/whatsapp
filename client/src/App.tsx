@@ -1,21 +1,24 @@
-import React from "react";
+import React from 'react';
 import {
   BrowserRouter,
   Route,
   Redirect,
-
-  RouteComponentProps
-} from "react-router-dom";
-import ChatsListScreen from "./components/ChatsListScreen";
-import ChatRoomScreen from "./components/ChatRoomScreen";
+  RouteComponentProps,
+} from 'react-router-dom';
+import ChatRoomScreen from './components/ChatRoomScreen';
+import ChatsListScreen from './components/ChatsListScreen';
 import AnimatedSwitch from './components/AnimatedSwitch';
+import { useCacheService } from './services/cache.service';
 
-const redirectToChats = () => <Redirect to="/chats" />;
+
+
 function App() {
+
+  useCacheService();
+
   return (
     <BrowserRouter>
       <AnimatedSwitch>
-        
         <Route exact path="/chats" component={ChatsListScreen} />
         <Route
           exact
@@ -26,8 +29,14 @@ function App() {
           component={({
             match,
             history
-          }: RouteComponentProps<{ chatId: string; match: any, history:any}>) => (
-            <ChatRoomScreen chatId={match.params.chatId} match={match} history={history} />
+          }: RouteComponentProps<{
+            chatId: string;
+          }>) => (
+            <ChatRoomScreen
+              chatId={match.params.chatId}
+              match={match}
+              history={history}
+            />
           )}
         />
       </AnimatedSwitch>
@@ -35,5 +44,7 @@ function App() {
     </BrowserRouter>
   );
 }
+
+const redirectToChats = () => <Redirect to="/chats" />;
 
 export default App;

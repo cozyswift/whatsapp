@@ -5,6 +5,7 @@ type Message {
   id: ID!
   content: String!
   createdAt: Date!
+  chat: Chat
 }
 
 type Chat {
@@ -12,8 +13,18 @@ type Chat {
   name: String!
   picture: URL
   lastMessage: Message
+  messages: [Message!]!
 }
 
 type Query {
   chats: [Chat!]!
+  chat(chatId: ID!): Chat
+}
+
+type Mutation {
+  addMessage(chatId: ID!, content: String!): Message
+}
+
+type Subscription {
+  messageAdded: Message!
 }

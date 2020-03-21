@@ -5,14 +5,19 @@
   "license": "MIT",
   "private": true,
   "scripts": {
+    "prestart": "yarn codegen",
     "start": "ts-node index.ts",
     "format": "prettier \"**/*.ts\" --write",
-    "test": "TZ=\"Asia/Seoul\" jest"
+    "test": "TZ=\"Asia/Seoul\" jest",
+    "codegen": "graphql-codegen"
   },
   "jest-junit": {
     "outputDirectory": "./test-results"
   },
   "devDependencies": {
+    "@graphql-codegen/cli": "^1.13.1",
+    "@graphql-codegen/typescript": "^1.13.1",
+    "@graphql-codegen/typescript-resolvers": "^1.13.1",
     "@types/cors": "^2.8.6",
     "@types/express": "^4.17.2",
     "@types/graphql": "^14.5.0",
@@ -31,14 +36,17 @@
     "apollo-client": "^2.6.8",
     "apollo-link": "^1.2.13",
     "apollo-link-http": "^1.5.16",
+    "apollo-link-ws": "^1.0.19",
     "apollo-server-express": "^2.10.1",
+    "apollo-utilities": "^1.3.3",
     "cors": "^2.8.5",
     "express": "^4.17.1",
     "graphql": "^14.6.0",
-    "graphql-import": "^1.0.0-beta.2",
+    "graphql-import": "^0.7.1",
     "graphql-scalars": "^1.0.6",
     "graphql-tools": "^4.0.7",
-    "history": "^4.10.1"
+    "history": "^4.10.1",
+    "subscriptions-transport-ws": "^0.9.16"
   },
   "jest": {
     "transform": {

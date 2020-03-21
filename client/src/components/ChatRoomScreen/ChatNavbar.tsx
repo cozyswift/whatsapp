@@ -5,7 +5,6 @@ import React from "react";
 import { useCallback } from "react";
 import styled from "styled-components";
 import { History } from "history";
-import { ChatQueryResult } from "./index";
 
 const Container = styled(Toolbar)`
   padding: 0;
@@ -34,7 +33,10 @@ const Name = styled.div`
 
 interface ChatNavbarProps {
   history: History;
-  chat: ChatQueryResult;
+  chat?: {
+    picture?: string | null;
+    name?: string | null;
+  };
 }
 
 function ChatNavBar({ chat, history }: ChatNavbarProps) {
@@ -47,11 +49,14 @@ function ChatNavBar({ chat, history }: ChatNavbarProps) {
       <BackButton onClick={navBack} data-testid="back-button">
         <ArrowBackIcon />
       </BackButton>
-      <Picture src={chat.picture} data-testid="chat-picture"/>
-      <Name data-testid="chat-name">{chat.name}</Name>
+      {chat && chat.picture && chat.name && (
+        <React.Fragment>
+          <Picture src={chat.picture} data-testid="chat-picture" />
+          <Name data-testid="chat-name">{chat.name}</Name>
+        </React.Fragment>
+      )}
     </Container>
   );
 }
 
 export default ChatNavBar;
-
