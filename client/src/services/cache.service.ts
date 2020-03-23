@@ -1,11 +1,11 @@
 import { DataProxy } from 'apollo-cache';
 import { defaultDataIdFromObject } from 'apollo-cache-inmemory';
-import { ApolloClient } from 'apollo-client';
+import { ApolloClient, } from 'apollo-client';
 import * as fragments from '../graphql/fragments';
 import * as queries from '../graphql/queries';
 import { MessageFragment, useMessageAddedSubscription } from '../graphql/types';
 
-type Client =  DataProxy;
+type Client = DataProxy;
 
 export const useCacheService = () => {
   useMessageAddedSubscription({
@@ -65,13 +65,20 @@ export const writeMessage = (client: Client, message: MessageFragment) => {
     return;
   }
   console.log('성공')
+
+  console.log({data})
+
   if (!data || data === null) {
     return null;
   }
+  
   if (!data.chats || data.chats === undefined) {
     return null;
   }
   const chats = data.chats;
+
+  console.log({chats})
+
 
   const chatIndex = chats.findIndex((c: any) => {
     if (message === null || message.chat === null||message.chat===undefined) return -1;

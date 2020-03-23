@@ -8,40 +8,32 @@ import {
 import ChatRoomScreen from './components/ChatRoomScreen';
 import ChatsListScreen from './components/ChatsListScreen';
 import AnimatedSwitch from './components/AnimatedSwitch';
-import { useCacheService } from './services/cache.service';
+import { withAuth } from './services/auth.service';
+import AuthScreen from './components/AuthScreen';
 
 
 
 function App() {
 
-  useCacheService();
-
+ 
   return (
     <BrowserRouter>
-      <AnimatedSwitch>
-        <Route exact path="/chats" component={ChatsListScreen} />
-        <Route
-          exact
-          path="/chats/:chatId"
-          // path의 경로의 따라 match의 params 값이 바뀐다.
-          // 여러개의 변수는 /chats/:chatId:name 이런형태로 넘긴다
+    <AnimatedSwitch>
+      <Route exact path="/sign-(in|up)" component={AuthScreen} />
+      <Route exact path="/chats" component={withAuth(ChatsListScreen)} />
 
-          component={({
-            match,
-            history
-          }: RouteComponentProps<{
-            chatId: string;
-          }>) => (
-            <ChatRoomScreen
-              chatId={match.params.chatId}
-              match={match}
-              history={history}
-            />
-          )}
-        />
-      </AnimatedSwitch>
-      <Route exact path="/" component={redirectToChats} />
-    </BrowserRouter>
+      <Route
+        exact
+        path="/chats/:chatId"
+        component={withAuth(
+          ({ match, history }: RouteComponentProps<{ chatId: string }>) => (
+            <ChatRoomScreen chatId={match.params.chatId} history={history} match={match} />
+          )
+        )}
+      />
+    </AnimatedSwitch>
+    <Route exact path="/" render={redirectToChats} />
+  </BrowserRouter>
   );
 }
 
